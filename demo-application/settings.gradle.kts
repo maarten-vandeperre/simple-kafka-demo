@@ -10,4 +10,4 @@ pluginManagement {
         id(quarkusPluginId) version quarkusPluginVersion
     }
 }
-rootProject.name="simple-kafka-demo"
+rootProject.name="sample-kafka-demo"

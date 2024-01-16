@@ -1,0 +1,4 @@
+FROM registry.access.redhat.com/ubi8/openjdk-21@sha256:95e4863640a18f62a79eb00b6d2790a0e9821f9bfbaa933b5e1a1274cf756f19
+
+COPY /build/sample-kafka-demo-1.0.0-SNAPSHOT-runner.jar /app.jar
+ENTRYPOINT ["java","-jar","/app.jar"]

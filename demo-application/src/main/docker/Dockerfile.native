@@ -7,11 +7,11 @@
 #
 # Then, build the image with:
 #
-# docker build -f src/main/docker/Dockerfile.native -t quarkus/simple-kafka-demo .
+# docker build -f src/main/docker/Dockerfile.native -t quarkus/sample-kafka-demo .
 #
 # Then run the container using:
 #
-# docker run -i --rm -p 8080:8080 quarkus/simple-kafka-demo
+# docker run -i --rm -p 8080:8080 quarkus/sample-kafka-demo
 #
 ###
 FROM registry.access.redhat.com/ubi8/ubi-minimal:8.9

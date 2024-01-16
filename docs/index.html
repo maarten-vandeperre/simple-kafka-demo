@@ -1,5 +1,32 @@
-<h1>Simple Kafka Demo</h1>
+<h1>Sample Kafka Demo</h1>
 
 <ol>
-    <li>Install the Strimzi operator</li>
+    <li>Create a namespace (e.g., kafka-showcase).</li>
+    <li>Install the Strimzi operator within the namespace.</li>
+    <li>Create a Kafka instance within the namespace and call it "my-cluster" (via the operator).</li>
+    <li>Create topic 'sample-requests' (via the operator).</li>
+    <li>(optional) Build your own application image<ol>
+        <li>Open command line.</li>
+        <li>Go to the application folder: cd demo-application</li>
+        <li>Create the uber-jar: ./gradlew build -Dquarkus.package.type=uber-jar</li>
+        <li>Build the container image (you'll probably have to change the repository name of the docker tag. In case you use docker instead of podman, just replace podman with docker):
+            podman build -t quay.io/appdev_playground/sample-kafka-demo:0.0.1 -f src/main/docker/Dockerfile_UberJar . --platform=linux/amd64</li>
+        <li>Push the container image (In case you use docker instead of podman, just replace podman with docker):
+            podman push quay.io/appdev_playground/sample-kafka-demo:0.0.1</li>
+    </ol></li>
+    <li>Deploy the application on OpenShift<ol>
+        <li>Go to developer view</li>
+        <li>Click '+ Add'</li>
+        <li>Select 'Container Images'</li>
+        <li>Pass 'quay.io/appdev_playground/sample-kafka-demo:0.0.3' or the image created in previous optional step</li>
+        <li>Select 'create application' and name it 'sample-application'</li>
+        <li>Target port is 8080</li>
+        <li>Select 'create a route'</li>
+        <li>Add environmental property 'kafka.bootstrap.servers', with value 'my-cluster-kafka-bootstrap.kafka-showcase.svc.cluster.local:9092'.
+        This can be done within the create-flow (select deployment link at the bottom) or afterwords, in the deployment detail screen.</li>
+    </ol></li>
+    <li>Test the application (it can be that the openshift suffix of the domain will be different for yours).<ol>
+        <li>Open the listener: https://sample-application-kafka-showcase.apps.ocp4-bm.redhat.arrowlabs.be/kafka-demo/listen</li>
+        <li>Open the producer (on each page refresh, a message will be generated): https://sample-application-kafka-showcase.apps.ocp4-bm.redhat.arrowlabs.be/kafka-demo/create</li>
+    </ol></li>
 </ol>
